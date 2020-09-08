@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+class Player
+{
+    String name;
+    String team;
+    String skill;
+    int capName;
+
+    
+    Player(int capNum,String name, String team, String skill)
+    {
+        this.capName=capName;
+        this.name=name;
+        this.team=team;
+        this.skill=skill;
+    }
+   
+  public String toString() {
+                return capName+"--"+name+"--"+team+"--"+skill;
+}
+}
+class PlayerComparator implements Comparator<Player>{
+ 
+                @Override
+                public int compare(Player o1, Player o2) {
+                                if(o1.capName==o2.capName)
+                                return 0;
+                                else if(o1.capName > o2.capName)
+                                                return 1;
+                                else
+                                                return -1;
+                }
+ 
+}
+class Main{
+public static void main(String[] args)
+{
+    Scanner input=new Scanner(System.in);
+    List<Player> l=new ArrayList<>();
+    System.out.println("Enter the number of players: ");
+    int count=input.nextInt();
+    String name;
+    String team;
+    String skill;
+    int capName;
+    for(int i=1;i<=count;i++)
+    {
+        System.out.println("Enter player "+i+" detail");
+        capName=input.nextInt();
+        name=input.next();
+        team=input.next();
+        skill=input.next();
+        l.put(new Player(capName,name,team,skill));
+    }
+    Collections.sort(l,new PlayerComparator());
+    for(Player t:l)
+        System.out.println(t);
+}}
